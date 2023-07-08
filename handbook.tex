@@ -1,0 +1,46 @@
+% This is a modified version of the tufte-latex book example in which the title page and the contents page resemble Tufte's VDQI book, using Kevin Godby's code from this thread at https://groups.google.com/forum/#!topic/tufte-latex/ujdzrktC1BQ.
+%
+%% Unfortunately for the contents to contain
+%% the "Parts" lines successfully, hyperref
+%% needs to be disabled.
+\documentclass{tufte-book}
+% \usepackage[T2A]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[OT1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage[utf8]{inputenc} % Required for including letters with accents
+\usepackage[russian]{babel}
+\usepackage{graphicx}
+
+\title{Вероятность и \\ статистика \\ \Huge{Поваренная книга}}
+
+\author{Nurlan Sadykov}
+
+% Абстракт
+% Заметки по решению кубика рубика с помощью теории групп.
+
+\begin{document}
+
+\frontmatter
+
+
+\maketitle  
+
+\chapter{Probability}
+
+\chapter{Statistics}
+
+\section{Cookbook}
+
+\begin{enumerate}
+    \item \emph{Репозиторий.} Анализ самостоятельного датасета лучше поместить
+        в отдельную папку.
+
+    \item \emph{Описальные статистики} стоит просмотреть чтобы понять качество
+        данных и исключить сильные аномалии.
+
+    \item Построить \emph{гистограмму} чтобы понять распределение и проверить
+        на выбросы.\sidenote{Иногда удобно просматривать логарифмированную
+        фичу. Если фича сильно отстоит от нуля, ее лучше переместить в ноль.} 
+
+\end{enumerate}
+
+\end{document}
