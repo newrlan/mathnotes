@@ -5,8 +5,12 @@
 %% needs to be disabled.
 \documentclass[a4paper, oneside]{book}
 
+
+\usepackage{amsmath, systeme}
+
+% Настройки боковых заметок
 \usepackage[a4paper, marginparwidth=6cm, marginparsep=0.8cm]{geometry}
-\geometry{left=2cm}
+\geometry{left=1.5cm}
 \geometry{right=8cm}
 
 \setlength{\marginparpush}{15pt}
@@ -17,13 +21,17 @@
 \usepackage[russian]{babel}
 \usepackage{graphicx}
 
+% marginnote создает НЕ нумерованные плавающие боковые заметки
 \usepackage{marginnote}
 
+% Здесь делаем маленький шрифт для marginnote
 \let\oldmarginpar\marginpar
 \renewcommand\marginpar[1]{\-\oldmarginpar[\raggedleft\footnotesize #1]%
 {\raggedright\footnotesize #1}}
 
+% sidenotes создает НУМЕРОВАННЫЕ плавающие боковые заметки и боковые картинки
 \usepackage{sidenotes}
+% Здесь делаем маленький шрифт для sidenotes
 \makeatletter
 \RenewDocumentCommand\sidenotetext{ o o +m }{%      
     \IfNoValueOrEmptyTF{#1}{%
@@ -35,8 +43,11 @@
 }
 \makeatother
 
+% Настройки библиографии
+\usepackage[backend=biber]{biblatex}
+\addbibresource{biblio.bib}
+
 \usepackage[breaklinks,hidelinks]{hyperref}
-\usepackage{natbib}
 
 
 \title{Вероятность и \\ статистика \\ \Huge{Поваренная книга}}
@@ -150,9 +161,13 @@
 \marginpar{Результаты кластерного анализа нужно интерпретировать: анализ всегда
 должен давать что-то новое о данных, что общего у объектов в кластере и чем
 различаются кластеры.}
-\marginpar{Кривую локтя можно построить и для метода k-средних. В этом случае по
-оси абсцисс будет лежать выбранный $k$ по оси ординат качество получившейся
-кластеризации {\color{red} TODO добавить линк} }
+\marginpar{
+    Кривую локтя можно построить и для метода k-средних. В этом случае по оси
+    абсцисс будет лежать выбранный $k$ по оси ординат качество получившейся
+    кластеризации.
+
+    См. \fullcite{yandex:book}, глава 7.
+}
 
 Недостатки иерархической кластеризации:
 \begin{itemize}
@@ -361,14 +376,44 @@ $M(\Delta) = 0$\marginpar{
 \end{equation}
 В сущностной части это на сколько дисперсия предсказания отличается от дисперсии наблюдений.
 
-Во время построения модели регрессии самая большая проблема - наличие коллинеарных векторов (зависимых переменных в фичах). 
+\marginpar{
+    \emph{Наивная мультивариантная линейная регрессия:}
+    \[ y = X\beta + \epsilon\]
+    \[\epsilon \sim N(0,\, \sigma^2 I)\]
+    $\epsilon$ - коэффициент \emph{невязки}, определяет шум системы.
 
-F~\cite{Wats:ItS}
-G~~\cite{ASDF}~\cite{Wats:ItS}
+    Коэффициенты находятся формулой
+    \[ \hat \beta = (X^TX)^{-1}X^Ty \]
 
+    Вариация вычисленных коэффициентов
+    \[ Var(\hat \beta) = \sigma^2 (X^TX)^{-1}\]
+    Это легко вывести если воспользоваться формулой дисперсии произведения 
+    \[Var(AX) = A \cdot Var(X) \cdot A^T.\]
+}
 
-\bibliographystyle{IEEEtran}
-\bibliography{biblio}
+Во время построения модели регрессии самая большая проблема - наличие коллинеарных векторов (зависимых переменных в фичах). Чтобы очистить список фичей, можно проверить гипотезу что вычисленная фича нулевая (для каждой фичи индивидуально). 
 
+\begin{equation*}
+    \label{eq:zero_coeff_hyp}
+    \left\{
+    \begin{array}{lr}
+        H_0: & \; \hat \beta_i = 0 \\
+        H_1: & \; \hat \beta_i \ne 0
+    \end{array}
+    \right.
+\end{equation*}
+
+Если предположить что коэффициент имеет нормальное распределение, то мы можем
+воспользоваться t-тестом Стьюдента и посчитать p-value. Если гипотеза не будет
+отвергнута, это будет означать, что мы фичу стоит выкинуть потому что ее
+коэффициент равен нулю. Соответственно там где гипотеза не подтвердилась фичи
+являются ценными.
+
+Выкидывать фичи стоит по одному. Начиная с самой слабой по p-value, каждый раз с новым набором фичей анализ лучше проводить заново.\sidenote{
+    \fullcite{Watts:ItS}
+}
+
+\medskip
+\printbibliography
 
 \end{document}

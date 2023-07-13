@@ -4,4 +4,9 @@ __pycache__
 *.aux
 *.log
 handbook.pdf
+handbook*.bib
+*.bbl
+*.bcf
+*.blg
+*.xml
 *.out
