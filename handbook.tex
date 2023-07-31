@@ -1,12 +1,8 @@
-% This is a modified version of the tufte-latex book example in which the title page and the contents page resemble Tufte's VDQI book, using Kevin Godby's code from this thread at https://groups.google.com/forum/#!topic/tufte-latex/ujdzrktC1BQ.
-%
-%% Unfortunately for the contents to contain
-%% the "Parts" lines successfully, hyperref
-%% needs to be disabled.
 \documentclass[a4paper, oneside]{book}
 
 
 \usepackage{amsmath, systeme, amsfonts}
+\usepackage{cancel}
 
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -396,6 +392,38 @@ $M(\Delta) = 0$\marginpar{
         (\frac{s_1^2}{n_1})^2/(n_1 - 1) + (\frac{s_2^2}{n_2})^2/(n_2-1)
     }
 \end{equation}
+
+\paragraph{Объем выборки.}
+\marginpar{
+    $1 - \beta$ --- мощность (power) \\
+    $\delta = \mu_1 - \mu_0$
+}
+
+Чтобы рассчитать объем необходимой выборки для проведения теста нужно зафиксировать уровень ошибок второго рода~$\beta$. Критическая точка определяет границу между принятием нулевой гипотезы или альтернативной. Если посчитать границу исходя из каждой гипотезы получим такое уравнение
+
+\marginpar{
+    \[
+        z = \frac{x - \mu}{\sigma}  \quad\longrightarrow\quad
+        x = \mu + z \cdot \sigma
+    \]
+}
+\begin{equation}
+    \label{eq:sample_size_border}
+    \cancel{\mu_0} + z_{1-\alpha / 2} \,\sigma_0 \sqrt{\frac{1}{n_0} + \frac{1}{n_1}}
+    = 
+    \cancel{\mu_0} + \delta - z_{1-\beta} \,\sqrt{\frac{\sigma_0}{n_0} + \frac{\sigma_1}{n_1}}.
+\end{equation}
+
+Уравнение~\ref{eq:sample_size_border} основа для расчета минимального объема выборки. Если предположить $n_0 = n_1 = n$, что обеспечит одинаковый объем в тестовом и контрольном сплитах, и $\sigma_0 = \sigma_1 = \sigma$ поучим формулу
+\marginpar{
+    Chapter 2 in
+    \fullcite{van2011statistical}
+}
+\begin{equation}
+    \label{eq:sample_size_for_mean}
+    n = \frac{\sigma^2 (z_{1 - \alpha / 2} + z_{1 - \beta})^2}{\delta^2}
+\end{equation}
+
 
 \section{Сравнение медиан}
 Для сравнения медиан используются:
