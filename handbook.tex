@@ -93,6 +93,52 @@
 
 \part{Probability}
 
+\chapter{Большие числа}
+\section{Закон больших чисел}
+Есть последовательность независимых наблюдений $X_1,\;X_2,\;\cdots$ выбранных
+из одного распределения с конечными мат.ожиданием~$\mu$ и
+дисперсией~$\sigma^2$. Среднее значение выборки первых~$n$ элементов будет тоже
+равно~$\mu$.
+\marginpar{Неравенство Чебышева:
+    \[ P(\mid x - \mu \mid\, \geq\, k \sigma) \,\leq\, \frac{1}{k^2} \]
+
+}
+
+\[
+    m_n = \frac1n (X_1 + X_2 + \dots + X_n)
+\]
+\[
+    M(m_n) = \frac1n (M(X_1) + M(X_2) + \dots + M(X_n))
+    = \mu
+\]
+А еще можем посчитать дисперсию:
+\[
+    D(m_n) = \frac{1}{n^2} \left(
+            D(X_1) + D(X_2) + \cdots + D(X_n)
+        \right)
+        =
+        \frac{1}{n^2} n \sigma^2 = \frac{\sigma^2}{n}
+\]
+
+Тогда если воспользоваться неравенством Чебышева, получим
+\[
+    P\left(|m_n - \mu| \geq \epsilon\right) = 
+    P\left(|m_n - \mu| \geq \epsilon \frac{\sqrt{n}}{\sigma} \frac{\sigma}{\sqrt{n}}\right) \leq 
+    \frac{\sigma^2}{n\,\epsilon^2}
+\]
+Теперь можем посчитать вероятность малых различий в разности
+\[
+    P\left(|m_n - \mu| < \epsilon\right) = 
+    1 - P\left(|m_n - \mu| \geq \epsilon \right) \geq 
+    1 - \frac{\sigma^2}{n\,\epsilon^2}.
+\]
+
+Откуда можем вывести предел по вероятности
+\begin{equation}
+    \label{eq:LLN}
+    \lim_{n \to \infty} m_n = \mu
+\end{equation}
+
 \part{Statistics}
 
 \section{Cookbook}
