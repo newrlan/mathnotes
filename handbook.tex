@@ -22,6 +22,7 @@
 
 % marginnote создает НЕ нумерованные плавающие боковые заметки
 \usepackage{marginnote}
+\renewcommand*{\marginfont}{\footnotesize}
 
 % Здесь делаем маленький шрифт для marginnote
 \let\oldmarginpar\marginpar
@@ -833,6 +834,62 @@ $r_l$ - левая граница интервала, $r_r$ - правая. По
 В случае если дисперсии равны, значение статистики~$F$ должно находиться в районе 1. Зная распределение можно вычислить критическую точку или посчитать p-value.
 
 
+\section{ANOVA: Дисперсионный анализ}
+\marginpar{ANOVA: ANalysis Of VAriance}
+\marginpar{
+    $q$ --- количество групп  \\
+    $n_j$ --- количество наблюдений в группе~$j$ \\
+    $y_{ij}$ --- $i$-ое наблюдение в группе~$j$\\
+    $\mu_j$ --- мат.ожидание в группе $j$
+
+    \[ n = \sum_{j=1}^q n_j \]
+}
+
+Тест предназначен для экспериментов когда имеется более чем 2 группы. ANOVA
+проверяет, что все группы имеют одинаковое мат.ожидания. Альтернативой будет
+наличие хотя бы одной пары в которой не совпадают мат.ожидания.
+\begin{equation}
+    \label{eq:anova_hyps}
+    \begin{cases}
+        H_0: &\text{для всех}\; j,\,k,\quad  \mu_j = \mu_k, \\
+        H_1: &\text{есть пара}\; j,\,k, \quad \mu_j \ne \mu_k
+    \end{cases}
+\end{equation}
+
+\marginpar{
+    \begin{eqnarray*}
+        \overline{y}_j &=& \frac{1}{n_j}\sum_{i=1}^{n_j} y_{ij} \\
+        \overline{\overline{y}} &=& \frac1n \sum_{j=1}^q n_j \overline{y}_j
+    \end{eqnarray*}
+}
+Построим общую сумму квадратов
+\begin{equation}
+    \label{eq:SS_total}
+    SS_{total} = \sum_{j=1}^q\sum_{i=1}^{n_j}(y_{ij} - \overline{\overline{y}})
+\end{equation}
+и разложим ее не две составляющие
+\begin{equation*}
+    \sum_{i=1}^{n_j}(y_{ij} - \overline{\overline{y}})^2 =
+    \sum_{i=1}^{n_j}(y_{ij} - \overline y)^2 + n_j(\overline y_j - \overline{\overline{y}})^2
+    = (n_j - 1) s_j^2 + n_j(\overline y_j - \overline{\overline{y}})^2
+\end{equation*}
+Используя эти формулы сможем разложить $SS_{total}$ на сумму внутригрупповых отклонений и на межгрупповых отклонений
+\begin{equation}
+    SS_{total} = SS_{residual} + SS_{between}
+\end{equation}
+\marginpar{
+    $SS_{residual}$ имеет $n - q$ степеней свободы \\
+    $SS_{between}$ имеет $q - 1$ степеней свободы \\
+}
+\begin{equation}
+    \label{eq:ss}
+    SS_{residual} = \sum_{j=1}^q(n_j-1) s_j^2 \qquad
+    SS_{between} = \sum_{j=1}^q n_j(\overline y_j - \overline{\overline{y}})^2
+\end{equation}
+Если мат.ожидания во всех группах действительно равны, то межгрупповые ошибки не отличаются от внутригрупповых ошибок, а значит статистика~$F$ подчинена распределению Фишера
+\begin{equation}
+    F = \frac{SS_{between} / (q -1)}{SS_{residual} / (n - q)} \,.
+\end{equation}
 
 
 \section{Проверка зависимости}
