@@ -643,9 +643,18 @@ $M(\Delta) = 0$\marginpar{
 
 \subsection{Критерий Манна-Уитни. U-test.}
 
+% \begin{marginfigure}
+%     \includegraphics[width=1.1\columnwidth]{pics/mann-whitney_roc.pdf}
+%     \label{fig:mann-whitney_roc}
+% \end{marginfigure}
 \begin{marginfigure}
-    \includegraphics[width=1.1\columnwidth]{pics/mann-whitney_roc.pdf}
+    \includegraphics[width=1.1\columnwidth]{pics/Uy_square.pdf}
     \label{fig:mann-whitney_roc}
+    \caption{
+        Пояснение формулы $U_y$. По выборкам была составлена последовательность
+        $XYXXYXYYXXXYXXYX$. Числа на ступенчатой кривой --- ранги в общей
+        последовательности, числа на оси $Oy$ --- ранги в выборке~$y$.
+    }
 \end{marginfigure}
 Чтобы применить критерий Манна-Уитни данные должны обладать порядком (числа
 подходят). Это непараметрический тест поэтому область его применения может быть
@@ -670,8 +679,10 @@ $S=\frac{n_1\,n_2}{2}$. Так мы свели задачу к проверки 
     \label{eq:Mann-Whitney:U}
     \left.
     \begin{array}{ll}
-        U_x &= n_x \, n_y + \frac{n_x (n_x + 1)}{2} - T_x \\
-        U_y &= n_x \, n_y + \frac{n_y (n_y + 1)}{2} - T_y
+        % U_x &= n_x \, n_y + \frac{n_x (n_x + 1)}{2} - T_x \\
+        % U_y &= n_x \, n_y + \frac{n_y (n_y + 1)}{2} - T_y
+        U_x &= T_x - \frac{n_x (n_x + 1)}{2} \\
+        U_y &= T_y - \frac{n_y (n_y + 1)}{2} \\
     \end{array}
     \;\right]
     \quad \Rightarrow \quad
