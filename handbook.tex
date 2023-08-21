@@ -679,8 +679,6 @@ $S=\frac{n_1\,n_2}{2}$. Так мы свели задачу к проверки 
     \label{eq:Mann-Whitney:U}
     \left.
     \begin{array}{ll}
-        % U_x &= n_x \, n_y + \frac{n_x (n_x + 1)}{2} - T_x \\
-        % U_y &= n_x \, n_y + \frac{n_y (n_y + 1)}{2} - T_y
         U_x &= T_x - \frac{n_x (n_x + 1)}{2} \\
         U_y &= T_y - \frac{n_y (n_y + 1)}{2} \\
     \end{array}
@@ -689,7 +687,6 @@ $S=\frac{n_1\,n_2}{2}$. Так мы свели задачу к проверки 
     U = \min(U_x,\; U_y)
 \end{equation}
 
-\marginpar{MDE можно вычислять как для одновыборочного теста на мат.ожидание.}
 \begin{equation}
     \label{eq:Mann-Whitney:z-value}
     \left.
@@ -704,6 +701,8 @@ $S=\frac{n_1\,n_2}{2}$. Так мы свели задачу к проверки 
     z = \frac{U - m_U}{s_U}
 \end{equation}
 \marginpar{\fullcite{watkins2019introduction}}
+
+\paragraph{MDE} можно вычислять как для одновыборочного теста на мат.ожи\-да\-ние.
 
 \section{Сравнение вероятностей (частот)}
 \subsection{Классическая схема}
