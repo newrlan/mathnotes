@@ -95,6 +95,72 @@
 
 \part{Probability}
 
+\section{Полная вероятность}
+\marginpar{
+    \begin{equation}
+        \label{eq:low_of_full_probability}
+        P(A) = \sum_i P(A|B_i) \cdot P(B_i)
+    \end{equation}
+}
+Формула полной вероятности показывается как считается вероятность события, если
+это событие может случиться при различных условиях. Само по себе правило
+обычное, но очень полезны мат.ожидания и дисперсия полной вероятности.
+
+\subsection{Правило полного мат.ожидания}
+\marginpar{
+    \begin{equation}
+        \label{eq:low_of_total_expectation}
+        E\lbrack X \rbrack = E\lbrack E\lbrack X|Y \rbrack\rbrack
+    \end{equation}
+}
+В формуле полного мат.ожидания~\ref{eq:low_of_total_expectation} величина~$E[X|Y]$ случайная по~$Y$, поэтому в правой части формулы под внешним мат.ожиданием лежит не константа.
+
+Доказательство формулы, такое:
+\begin{multline*}
+E[E[X|Y]] = E\left[ \sum_x x P(X=x|Y)\right] = \\
+    \sum_y \left[ \sum_x x \, P(X=x|Y)\right] p(Y=y) = 
+    \sum_y \sum_x x P(X=x, Y=y) = \\
+    \sum_x x \sum_y P(X=x, Y=y) = \sum_x x \, P(X=x) = E[X]
+\end{multline*}
+
+\subsection{Правило полной дисперсии}
+\marginpar{
+    \begin{equation}
+        \label{eq:low_of_total_variance}
+        Var\lbrack Y \rbrack = 
+        E\lbrack Var\lbrack Y | X \rbrack \rbrack + Var\lbrack E\lbrack Y | X \rbrack \rbrack
+    \end{equation}
+}
+Разложим мат.ожидание $E[Y^2]$ по формуле полного мат.ожидания~\ref{eq:low_of_total_expectation} используя свойство $E[Y^2] = Var[Y] + E[Y]^2$
+\[ E[Y^2] = E\left[ E[Y^2 | X] \right] = E[Var[Y | X] + E[Y | X]^2]\]
+Теперь если разложить дисперсию, получим
+\begin{multline*}
+    Var[Y] = E[Y^2] - E[Y]^2 = \\
+    E\left[Var[Y|X]\right] + E\left[E[Y|X]^2\right] - E\left[E[Y|X]\right]^2 =  \\
+    E[Var[Y | X]] + Var[E[Y | X]]
+\end{multline*}
+
+\paragraph{Дисперсия при стратификации.}
+\marginpar{
+    Пример 1: Заработная плата в стране. Стратификация по регионам.
+
+    Пример 2: Рост подростков. Стратификация по возрасту и/или полу.
+}
+Предположим, $X$ имеет мультиномиальное распределение и принимает значения от~1 до~$K$. Обозначим соответствующие вероятности~$p_i$ для удобства. Мы хотим рассчитать вероятность величины~$Y$ которая зависит от~$X$.
+\marginpar{
+    $\mu_k$,~$\sigma_k$ --- параметры распределения~$Y$ внутри страты~$k$.
+}
+В формуле~\ref{eq:low_of_total_variance} участвует два слагаемых, которые можно вычислить напрямую
+\begin{align*}
+    E[Var[Y|X]] &= \sum_{k=1}^K \sigma_k^2 \, p_k, \\
+    Var[E[Y | X]] &= \sum_{k=1}^K (\mu_k - \mu)^2 \, p_k.
+\end{align*}
+Откуда и получим
+\begin{equation}
+    \label{eq:var_strat}
+    Var[Y] = \sum_{k=1}^K \sigma_k^2 \, p_k + \sum_{k=1}^K (\mu_k - \mu)^2 \, p_k
+\end{equation}
+
 \section{Комбинации случайных величин}
 \marginpar{
     $\xi_1,\;\xi_2$ --- случайные величины
@@ -112,7 +178,6 @@
     \label{eq:variable_sum}
     f_{\xi_1 + \xi_2} (t) = \int\limits_{-\infty}^\infty f_{\xi_1}(u)\,f_{\xi_2}(t - u)\,du
 \end{equation}
-
 
 \section{Характеристические функции}
 
