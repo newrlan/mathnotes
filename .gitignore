@@ -3,7 +3,7 @@ __pycache__
 *.DS_store
 *.aux
 *.log
-handbook.pdf
+theory/**/*.pdf
 handbook*.bib
 *.bbl
 *.bcf
