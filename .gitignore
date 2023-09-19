@@ -4,6 +4,7 @@ __pycache__
 *.aux
 *.log
 theory/**/*.pdf
+!theory/pics/*.pdf
 handbook*.bib
 *.bbl
 *.bcf
