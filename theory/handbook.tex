@@ -1,6 +1,5 @@
 \documentclass[a4paper, oneside]{book}
 
-
 \usepackage{systeme, amsfonts, amsthm}
 \usepackage[intlimits]{amsmath}
 \usepackage{cancel}
@@ -20,6 +19,7 @@
 \usepackage[utf8]{inputenc} % Required for including letters with accents
 \usepackage[russian]{babel}
 \usepackage{graphicx}
+\graphicspath{{\subfix{pics/}}}
 
 % marginnote создает НЕ нумерованные плавающие боковые заметки
 \usepackage{marginnote}
@@ -621,10 +621,13 @@ $M(\Delta) = 0$\marginpar{
 }
 \begin{equation}
     \label{eq:sample_size_for_mean}
-    n = \frac{s^2 (z_{1 - \alpha / 2} + z_{1 - \beta})^2}{\delta^2}
+    n = 2\, \frac{s^2 (z_{1 - \alpha / 2} + z_{1 - \beta})^2}{\delta^2}
 \end{equation}
 
 % \marginpar{
+\marginpar{
+    Ср.кв.отклонение~$s$ обычно оценивают на исторических данных до эксперимента. Например средним значением за 5 месяцев.
+}
     Величина~$\delta$ определяет минимальный обнаруживаемый эффект MDE (minimal
     detectable effect). В формуле~\eqref{eq:sample_size_for_mean} он
     присутствует в виде делителя. Это значит, что за обнаружение минимального
