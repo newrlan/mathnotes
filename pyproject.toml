@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "math-da"
+version = "0.1.0"
+description = ""
+authors = ["newrlan <nonZeroDeterminant@gmail.com>"]
+readme = "README.md"
+packages = [{include = "math_da"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
