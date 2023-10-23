@@ -12,3 +12,6 @@ handbook*.bib
 *.xml
 *.out
 *.toc
+*.fdb_latexmk
+*.fls
+*.synctex.gz
